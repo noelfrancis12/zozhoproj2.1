@@ -11456,7 +11456,9 @@ def create_ewaybillz(request):
 
         doc = request.POST.get('doc')
         transsub = request.POST.get('transsub')
+      
         customerzz = request.POST.get('customerzz')
+        cust=customer.objects.get(id=customerzz)
         cemail= request.POST.get('cemail')
         cgst_trt_inp = request.POST.get('cgst_trt_inp')
         cgstin_inp = request.POST.get('cgstin_inp')
@@ -11484,7 +11486,7 @@ def create_ewaybillz(request):
             
             doc=doc,
             transsub=transsub,
-            customerzz=customerzz,
+            customerzz=cust.customerName,
             cemail=cemail,
             cgst_trt_inp=cgst_trt_inp,
             cgstin_inp=cgstin_inp,
@@ -11603,7 +11605,11 @@ def ewayeditdb(request, id):
         # Update EWayBill fields
         eway.doc = request.POST.get('doc')
         eway.transsub = request.POST.get('transsub')
-        eway.customerzz = request.POST.get('customerzz')
+        customerzz = request.POST.get('customerzz')
+        custz=customer.objects.get(id=customerzz)
+        eway.customerzz=custz.customerName
+        eway.cust=custz
+        print(request.POST.get('customerzz'))
         eway.cemail = request.POST.get('cemail')
         eway.cgst_trt_inp = request.POST.get('cgst_trt_inp')
         eway.cgstin_inp = request.POST.get('cgstin_inp')

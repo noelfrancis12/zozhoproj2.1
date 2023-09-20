@@ -250,7 +250,7 @@
           <select name="customerzz" id="customer" class="form-control text-dark bg-light" >
             <option value="{{eway.cust.customerName}}"  class="text-dark bg-light">{{eway.cust.customerName}}</option>  
             {% for c in data %}
-            <option value="{{c.id}} {{c.customerName}}" data-email="{{ c.customerEmail }}" id="customername1" data-gst-treatment="{{c.GSTTreatment}}" data-GSTIN="{{c.GSTIN}}">{{ c.customerName }}</option>
+            <option value="{{c.id}}" data-email="{{ c.customerEmail }}" id="customername1" data-gst-treatment="{{c.GSTTreatment}}" data-GSTIN="{{c.GSTIN}}">{{ c.customerName }}</option>
             {% endfor %}
           </select>
           <a href="" data-toggle="modal" data-target="#newcustomer">+ Add New Customer</a>
