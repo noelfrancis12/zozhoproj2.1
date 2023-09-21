@@ -2382,9 +2382,13 @@
             var dropdown = $('#customer');
             dropdown.empty();
             $.each(data, function(key, value) {
-                dropdown.append($('<option></option>').attr('value', key).text(value[1]).val(value[0] + ' ' + value[1]));
-                console.log(value[0])
-            });
+    var optionText = value[1];
+    var optionValue = key;
+
+    // Append the option to the dropdown
+    dropdown.append($('<option></option>').attr('value', optionValue).text(optionText));
+    
+        });
         },
         error: function(xhr, status, error) {
             console.error(xhr.responseText);
@@ -2477,7 +2481,7 @@
             $.ajax({
               
               type : 'POST',
-              url:"{% url 'purchase_unit' %}",
+              url:"{% url 'purchase_unit_eway' %}",
           
               data:{
                   unit : $("#unit").val(),      
@@ -2496,7 +2500,7 @@
           function reloadUnit() {
           
             $.ajax({
-              url: "{% url 'purchase_unit_dropdown' %}",
+              url: "{% url 'purchase_unit_dropdown_eway' %}",
               type: "GET",
               dataType: "json",
               data: $(this).serialize(),
@@ -2570,7 +2574,7 @@
             $.ajax({
               
               type : 'POST',
-              url:"{% url 'purchase_item' %}",
+              url:"{% url 'purchase_item_eway' %}",
               
               data:{
                   type : itemtype,
@@ -2599,7 +2603,7 @@
           
           function reloadItem() {
             $.ajax({
-              url: "{% url 'purchase_item_dropdown' %}",
+              url: "{% url 'purchase_item_dropdown_eway' %}",
               type: "GET",
               dataType: "json",
               data: $(this).serialize(),

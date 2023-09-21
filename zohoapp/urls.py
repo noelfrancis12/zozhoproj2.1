@@ -554,6 +554,10 @@ urlpatterns = [
     path('get-transportation-options/', views.get_transportation_options, name='get_transportation_options'),
     path('purchase_customer_eway',views.purchase_customer_eway,name='purchase_customer_eway'),
     path('get_customerdet_eway',views.get_customerdet_eway,name='get_customerdet_eway'),
+    path('purchase_item_eway',views.purchase_item_eway,name='purchase_item_eway'),
+    path('purchase_item_dropdown_eway',views.purchase_item_dropdown_eway,name='purchase_item_dropdown_eway'),
+    path('purchase_unit_eway',views.purchase_unit_eway,name='purchase_unit_eway'),
+    path('purchase_unit_dropdown_eway',views.purchase_unit_dropdown_eway,name='purchase_unit_dropdown_eway'),
     re_path(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),
     
     

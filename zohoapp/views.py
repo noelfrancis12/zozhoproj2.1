@@ -5977,8 +5977,8 @@ def purchase_unit(request):
 
         unit = Unit(unit= unit)
         unit.save()
-
-        return HttpResponse({"message": "success"})
+     
+        return JsonResponse({"message": "success"})
         
 @login_required(login_url='login')        
 def purchase_unit_dropdown(request):
@@ -5989,7 +5989,7 @@ def purchase_unit_dropdown(request):
     option_objects = Unit.objects.all()
     for option in option_objects:
         options[option.id] = option.unit
-
+    
     return JsonResponse(options)
 
 @login_required(login_url='login')
@@ -6009,7 +6009,7 @@ def purchase_item(request):
         cost_price=request.POST.get('cost_price')
         cost_acc=request.POST.get('cost_acc')      
         cost_desc=request.POST.get('cost_desc')
-        units=Unit.objects.get(id=ut)
+        units=Unit.objects.get(unit=ut)
         sel=Sales.objects.get(id=sell_acc)
         cost=Purchase.objects.get(id=cost_acc)
 
@@ -6019,15 +6019,9 @@ def purchase_item(request):
         item=AddItem(type=type,unit=units,sales=sel,purchase=cost,Name=name,p_desc=cost_desc,s_desc=sell_desc,s_price=sell_price,p_price=cost_price,
                     user=user,creat=history,interstate=inter,intrastate=intra)
 
-        item.save()
-
-
-
-
-
-
-
-        return HttpResponse({"message": "success"})
+        item.save() 
+        print("function")
+        return JsonResponse({"message": "success"})
         
 @login_required(login_url='login')        
 def purchase_item_dropdown(request):
@@ -11757,3 +11751,72 @@ def get_customerdet_eway(request):
     print(id)
     # state = 'Not Specified' if cstate == "" else cstate
     return JsonResponse({'customer_email' :email, 'gst_treatment':gsttr, 'gstin': gstin , 'cust_id':cust_id,'cust_place_supply':cust_place_supply},safe=False)
+@login_required(login_url='login')
+def purchase_item_eway(request):
+
+    company = company_details.objects.get(user = request.user)
+
+    if request.method=='POST':
+        type=request.POST.get('type')
+        name=request.POST['name']
+        ut=request.POST['unit']
+        inter=request.POST['inter']
+        intra=request.POST['intra']
+        sell_price=request.POST.get('sell_price')
+        sell_acc=request.POST.get('sell_acc')
+        sell_desc=request.POST.get('sell_desc')
+        cost_price=request.POST.get('cost_price')
+        cost_acc=request.POST.get('cost_acc')      
+        cost_desc=request.POST.get('cost_desc')
+        units=Unit.objects.get(unit=ut)
+        sel=Sales.objects.get(id=sell_acc)
+        cost=Purchase.objects.get(id=cost_acc)
+
+        history="Created by " + str(request.user)
+        user = User.objects.get(id = request.user.id)
+
+        item=AddItem(type=type,unit=units,sales=sel,purchase=cost,Name=name,p_desc=cost_desc,s_desc=sell_desc,s_price=sell_price,p_price=cost_price,
+                    user=user,creat=history,interstate=inter,intrastate=intra)
+
+        item.save() 
+        print("function")
+        return JsonResponse({"message": "success"})
+        
+@login_required(login_url='login')        
+def purchase_item_dropdown_eway(request):
+
+    user = User.objects.get(id=request.user.id)
+
+    options = {}
+    option_objects = AddItem.objects.all()
+    for option in option_objects:
+        options[option.id] = option.Name
+
+    return JsonResponse(options)
+@login_required(login_url='login')
+def purchase_unit_eway(request):
+    
+    company = company_details.objects.get(user = request.user)
+
+    if request.method=='POST':
+
+        unit =request.POST.get('unit')
+        
+        u = User.objects.get(id = request.user.id)
+
+        unit = Unit(unit= unit)
+        unit.save()
+     
+        return JsonResponse({"message": "success"})
+        
+@login_required(login_url='login')        
+def purchase_unit_dropdown_eway(request):
+
+    user = User.objects.get(id=request.user.id)
+
+    options = {}
+    option_objects = Unit.objects.all()
+    for option in option_objects:
+        options[option.id] = option.unit
+    
+    return JsonResponse(options)
