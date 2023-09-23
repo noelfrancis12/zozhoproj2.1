@@ -11283,7 +11283,7 @@ def ewayb_customer(request):
         dpt = request.POST.get('dpt')
         gsttype=request.POST.get('gsttype')
         gstin=request.POST.get('gstin')
-        # panno=request.POST.get('panno')
+        panno=request.POST.get('panno')
         supply=request.POST.get('placeofsupply')
         tax = request.POST.get('tax_preference')
         currency=request.POST.get('currency')
@@ -11308,7 +11308,7 @@ def ewayb_customer(request):
 
         u = User.objects.get(id = request.user.id)
 
-        cust = customer(customerName = name,customerType = cust_type, companyName= comp_name, GSTTreatment=gsttype,GSTIN=gstin, 
+        cust = customer(customerName = name,customerType = cust_type, companyName= comp_name, GSTTreatment=gsttype,GSTIN=gstin,pan_no=panno, 
                         customerWorkPhone = w_mobile,customerMobile = p_mobile, customerEmail=email,skype = skype,Facebook = fb, 
                         Twitter = twitter,placeofsupply=supply,Taxpreference = tax,currency=currency, website=website, 
                         designation = desg, department = dpt,OpeningBalance=balance,Address1=street1,Address2=street2, city=city, 
