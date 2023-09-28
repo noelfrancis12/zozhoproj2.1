@@ -11247,7 +11247,8 @@ def ewaylistout(request):
 def ewaycreate(request):
      user_id=request.user.id
      udata=User.objects.get(id=user_id)
-     data=customer.objects.all()
+     user=request.user
+     data=customer.objects.filter(user_id=user.id)
      payments=payment_terms.objects.all()
      trans=Transportation.objects.all()
      units = Unit.objects.all()
@@ -11319,7 +11320,7 @@ def ewayb_customer(request):
         
 def customer_dropdown_ewayb(request):
     user = User.objects.get(id=request.user.id)
-
+    print("userid", request.user.id)
     options = {}
     option_objects = customer.objects.filter(user = user)
     for option in option_objects:
@@ -11768,7 +11769,7 @@ def purchase_item_eway(request):
         cost_price=request.POST.get('cost_price')
         cost_acc=request.POST.get('cost_acc')      
         cost_desc=request.POST.get('cost_desc')
-        units=Unit.objects.get(unit=ut)
+        units=Unit.objects.get(id=ut)
         sel=Sales.objects.get(id=sell_acc)
         cost=Purchase.objects.get(id=cost_acc)
 

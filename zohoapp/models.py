@@ -187,6 +187,16 @@ class customer(models.Model):
     fax=models.CharField(max_length=100,null=True,blank=True)
     remark=models.CharField(max_length=100,null=True,blank=True)
 
+
+    sAddress1=models.CharField(max_length=100,null=True,blank=True)
+    sAddress2=models.CharField(max_length=100,null=True,blank=True)
+    scity=models.CharField(max_length=100,null=True,blank=True)
+    sstate=models.CharField(max_length=100,null=True,blank=True)
+    scountry=models.CharField(max_length=100,null=True,blank=True)
+    szipcode=models.CharField(max_length=100,null=True,blank=True)
+    sphone1=models.CharField(max_length=100,null=True,blank=True)
+    sfax=models.CharField(max_length=100,null=True,blank=True)
+    
 class customer_contact_person_table(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE,null=True)
     Customr=models.ForeignKey(customer,on_delete=models.CASCADE,null=True)
