@@ -562,10 +562,12 @@
                             {% for item in ewayb %}
                             <tr>
                                 <td>{{ item.item }}</td>
-                                <td>{{ item.quantity }}</td>
+                                
                                 <td>{{ item.rate }}</td>
-                                <td>{{ item.tax }}</td>
+                                <td>{{ item.quantity }}</td>
                                 <td>{{ item.discount }}</td>
+                                <td>{{ item.tax }}</td>
+                                
                                 <td>{{ item.amount|floatformat:2 }}</td>
                             </tr>
                             {% endfor %}
@@ -701,10 +703,10 @@
 
                             <div class="row mb-4 d-flex justify-content-between align-items-center">
                                 <div class="col-md-6 mt-3">
-                                    <h6 class="mb-0 text-grey">Tax :</h6>
+                                    <h6 class="mb-0 text-grey">Tax Amount:</h6>
                                 </div>
                                 <div class="col-md-6 mt-3">
-                                    <span style="font-size: 18px; color: #434141;">{{ v.tax }} % </span>
+                                    <span style="font-size: 18px; color: #434141;">{{ v.tax }} </span>
                                     <!-- {% for bi in tax %}
                                         <input type="text" value="{{ bi|floatformat:2 }}" style="font-size: 18px; color: #434141; width: 55px;" class="tax 1 tx">
                                     <span class="text-muted">%</span><br><span style="margin-left: 55px;"></span>
