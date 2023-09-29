@@ -609,14 +609,18 @@
                         </tr>
                     {% endif %}
                                
-                                <tr>
-                                    <td style="font-weight:bold">Shipping Charge:</td>
-                                    <td style="font-weight:bold">{{i.shipping_charge}}</td>
-                                </tr>
-                                <tr>
-                                    <td style="font-weight:bold">Adjustment:</td>
-                                    <td style="font-weight:bold">{{i.adj}}</td>
-                                </tr>
+                    {% if i.shipping_charge != 0 %}
+                    <tr>
+                        <td style="font-weight:bold">Shipping Charge:</td>
+                        <td style="font-weight:bold">{{i.shipping_charge}}</td>
+                    </tr>
+                {% endif %}
+                {% if i.adj != 0 %}
+                <tr>
+                    <td style="font-weight:bold">Adjustment:</td>
+                    <td style="font-weight:bold">{{i.adj}}</td>
+                </tr>
+            {% endif %}
                                 <tfoot>
                                     <tr>
                                         <td style="font-weight:bold">Grand Total:</td>
@@ -746,7 +750,7 @@
                                     <h6 class="text-capitalize" style="color: azure;">{{ v.sub_total }}</h6>
                                 </div>
                             </div><br><br><br>
-                            <!-- Adjustment -->
+                            <!-- Adjustment -->{% if v.adj != 0 %}
                             <div class="d-flex justify-content-between mb-3">
                                 <div class="col-md-6 mt-3">
                                     <h5 style="color: #ccc;">Adjustment :</h5>
@@ -754,7 +758,7 @@
                                 <div class="col-md-6 mt-3">
                                     <h6 class="text-capitalize" style="color: azure;">{{ v.adj }}</h6>
                                 </div>
-                            </div><br><br><br>
+                            </div><br><br><br>{% endif %}
                             <!-- SGST/IGST/CGST -->
                              <!-- IGST -->
         {% if v.igst != 0 %}
@@ -789,7 +793,7 @@
             </div>
         </div><br><br><br>
         {% endif %}
-                            <!-- Shipping Charge -->
+                            <!-- Shipping Charge -->{% if v.shipping_charge != 0 %}
                             <div class="d-flex justify-content-between mb-3">
                                 <div class="col-md-6 mt-3">
                                     <h6 style="color: #ccc;">Shipping Charge :</h6>
@@ -797,7 +801,7 @@
                                 <div class="col-md-6 mt-3">
                                     <input type="text" value="{{ v.shipping_charge }} INR" class="amnt" style="font-size: 16px; color: azure;" readonly>
                                 </div>
-                            </div><br><br><br>
+                            </div><br><br><br>{% endif %}
                             <!-- Grand Total -->
                             <div class="d-flex justify-content-between">
                                 <div class="col-md-6 mt-3">
