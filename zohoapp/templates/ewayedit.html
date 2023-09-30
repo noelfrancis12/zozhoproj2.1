@@ -284,6 +284,7 @@
           <label for="gstin_inp">GST Number</label>
         </div>
         <div class="col-md-6">
+          
           <input type="text" class="form-control text-dark bg-light" value="{{eway.cust.GSTIN}}" id="ggist" name="cgstin_inp" >
         </div>
       </div>
@@ -2193,25 +2194,17 @@
           
           
             $(document).ready(function() {
-              $("#c_gsttype").change(function() {
-                var x=$('#c_gsttype').val();
-                // console.log(x)
-                if(x=="unregistered Business") 
-                {
-                  $(".gstrow").addClass('d-none');
-          
-                }
-                else if(x == 'Overseas'){
-                  $(".gstrow").addClass('d-none');
-                }
-                else 
-                {
-                  $(".gstrow").removeClass('d-none');
-                  $(".gstrow").addClass('d-flex');
-                }
-              
-              });
-            });
+    $("#c_gsttype").change(function() {
+        var x = $('#c_gsttype').val();
+        // console.log(x)
+        if (x == "Unregistered Business-not Registered under GST" || x == "Overseas- Persons with who you do import or exports of supplies outside india") {
+            $(".gstrow").addClass('d-none');
+        } else {
+            $(".gstrow").removeClass('d-none');
+            $(".gstrow").addClass('d-flex');
+        }
+    });
+});
           
           
               $(document).ready(function() {
