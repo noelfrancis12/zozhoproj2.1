@@ -11627,7 +11627,7 @@ def ewayeditdb(request, id):
         eway.grand_total = request.POST['grandtotal']
         eway.note = request.POST['note']
         eway.save()
-
+        print("test")
         # Delete existing EWayBillItems associated with this EWayBill
         EWayBillItem.objects.filter(eway_bill=eway).delete()
 

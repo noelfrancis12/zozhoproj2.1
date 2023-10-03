@@ -261,7 +261,7 @@
         </div>
       </div>
 
-      <div class="row mt-2 " id="cemail_row">
+      <div class="row mt-2 customer-info" id="cemail_row">
         <div class="col-md-3">
           <label for="cemail_inp">Customer Email</label>
         </div>
@@ -270,7 +270,7 @@
         </div>
       </div>
 
-      <div class="row mt-2 " id="cgst_trt_row">
+      <div class="row mt-2 customer-info" id="cgst_trt_row">
         <div class="col-md-3">
           <label for="gst_trt_inp">GST Treatment</label>
         </div>
@@ -279,11 +279,11 @@
         </div>
       </div>
 
-      <div class="row mt-2 mb-2 " id="cgstin_row">
-        <div class="col-md-3">
+      <div class="row mt-2 mb-2 customer-info" id="cgstin_row">
+        <div class="col-md-3" id="gstNumberLabel">
           <label for="gstin_inp">GST Number</label>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6" id="gstNumberContainer">
           
           <input type="text" class="form-control text-dark bg-light" value="{{eway.cust.GSTIN}}" id="ggist" name="cgstin_inp" >
         </div>
@@ -4801,23 +4801,55 @@ function reloadPayment() {
 
 </script> 
 <script>
-  var customerSelect = document.getElementById('customer');
- 
-  var customerEmailInput = document.getElementById('cemail_inp');
-  var gstTreatmentInput = document.getElementById('cgst_trt_inp');
-  var gstNumberInput = document.getElementById('ggist');
-  var customername =document.getElementById('customername1');
-  
-  customerSelect.addEventListener('change', function() {
+var customerSelect = document.getElementById('customer');
+var customerEmailInput = document.getElementById('cemail_inp');
+var gstTreatmentInput = document.getElementById('cgst_trt_inp');
+var gstNumberLabel = document.getElementById('gstNumberLabel');
+var gstNumberContainer = document.getElementById('gstNumberContainer');
+
+customerSelect.addEventListener('change', function() {
     var selectedOption = this.options[this.selectedIndex];
     var email = selectedOption.dataset.email;
     var gstTreatment = selectedOption.dataset.gstTreatment;
     var gstNumber = selectedOption.dataset.gstin;
-    console.log(customername.value)
+    
     customerEmailInput.value = email;
     gstTreatmentInput.value = gstTreatment;
-    gstNumberInput.value = gstNumber;
+    
+    if (gstNumber && gstNumber.trim().length > 0) {
+        // If GST Number is available and not empty, show the GST Number section
+        gstNumberLabel.style.display = 'block';
+        gstNumberContainer.style.display = 'block';
+        // Set the value of the GST Number input field
+        gstNumberContainer.querySelector('input').value = gstNumber;
+    } else {
+        // If GST Number is empty or not available, hide the GST Number section
+        gstNumberLabel.style.display = 'none';
+        gstNumberContainer.style.display = 'none';
+    }
+});
+
+</script>
+<!-- Include jQuery library if you haven't already -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+$(document).ready(function() {
+  // Hide sections initially
+  $(".customer-info").hide();
+
+  // When a customer is selected
+  $("#customer").change(function() {
+    var selectedCustomerId = $(this).val();
+
+    // If a customer is selected, show the sections; otherwise, hide them
+    if (selectedCustomerId) {
+      $(".customer-info").show();
+    } else {
+      $(".customer-info").hide();
+    }
   });
+});
 </script>
 
 
