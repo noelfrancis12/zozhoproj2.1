@@ -248,9 +248,14 @@
         </div>
         <div class="col-md-6">
           <select name="customerzz" id="customer" class="form-control text-dark bg-light" >
-            <option value="{{eway.cust.customerName}}"  class="text-dark bg-light">{{eway.cust.customerName}}</option>  
+           
+            <option value="">Select Customer</option>
             {% for c in data %}
+            {% if c.id == eway.cust.id %}
+            <option value="{{c.id}}"  selected>{{c.customerName}}</option>
+            {% else %}
             <option value="{{c.id}}" data-email="{{ c.customerEmail }}" id="customername1" data-gst-treatment="{{c.GSTTreatment}}" data-GSTIN="{{c.GSTIN}}">{{ c.customerName }}</option>
+            {% endif %}
             {% endfor %}
           </select>
           <a href="" data-toggle="modal" data-target="#newcustomer">+ Add New Customer</a>
@@ -545,14 +550,14 @@
                           <tr>
                               <td>Shipping Charges</td>
                               
-                              <td><input type="hidden" id="shipping_charge" name="shipping_charge" step="any" value="0.00" 
+                              <td><input type="hidden" id="shipping_charge" name="shipping_charge" step="any" value="{{eway.shipping_charge}}" 
                                   class="form-control bg-transparent border-0 text-right shipping_charge  "></td>
                                   <td><input type="number" class="form-control  bg-transparent border-0  text-light" id="shipping" value="{{eway.shipping_charge}}"> </td>
                           </tr>
                           <tr>
                             <td>Adjustment</td>
                             
-                            <td><input type="hidden" id="adj" name="adj" step="any" value="0.00" 
+                            <td><input type="hidden" id="adj" name="adj" step="any" value="{{eway.adj}}" 
                                 class="form-control bg-transparent border-0 text-right adj  "></td>
                                 <td><input type="number" class="form-control  bg-transparent border-0  text-light" id="adji" value="{{eway.adj}}"> </td>
                         </tr>

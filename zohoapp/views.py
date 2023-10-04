@@ -11558,7 +11558,8 @@ def delete_ewaybills(request, id):
 def ewayedit(request,id):
      user_id=request.user.id
      udata=User.objects.get(id=user_id)
-     data=customer.objects.all()
+     user = request.user
+     data = customer.objects.filter(user_id=user.id)
      payments=payment_terms.objects.all()
      trans=Transportation.objects.all()
      units = Unit.objects.all()
