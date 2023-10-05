@@ -429,11 +429,11 @@
 
                     <div class="mx-1">
                    
-                        <a href=" " class="fa fa-file-pdf btns toPDF px-2 py-2" id="toPDF"
+                        <a href="#" class="fa fa-file-pdf btns toPDF px-2 py-2" id="toPDF"
                         data-toggle="tooltip" title="PDF"></a>
 
-                        <a href="" class=" fa fa-print btns px-2 py-2"   data-toggle="tooltip"
-                            title="PRINT" onclick="window.print()"> </a>
+                        <a href="" class=" fa fa-print btns px-2 py-2"   
+                            title="PRINT" id="printbtn" onclick="toggleAndPrint('Template')"> </a>
 
                         <a href="" class="fa fa-envelope btns px-2 py-2" 
                             title="MAIL" data-toggle="modal" data-target="#emails" > </a>
@@ -1263,5 +1263,20 @@ $(document).ready(function () {
  });
 
 </script>
+<script>
+    function toggleAndPrint(sectionId) {
+        var templateSection = document.getElementById("Template");
+        var overviewSection = document.getElementById("Overview");
 
+        if (sectionId === "Template") {
+            templateSection.style.display = "block";
+            overviewSection.style.display = "none";
+        } else {
+            templateSection.style.display = "none";
+            overviewSection.style.display = "block";
+        }
+
+        window.print();
+    }
+</script>
 {% endblock %}
