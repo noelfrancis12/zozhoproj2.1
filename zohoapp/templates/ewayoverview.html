@@ -100,9 +100,15 @@
     }
 
     .tabcontent {
-        display: none;
+        /* display: none; */
+        z-index: 999;
         padding: 6px 12px;
         border-top: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width:100%;
+        height: 100%;
     }
 
     .page {
@@ -432,8 +438,8 @@
                         <a href="#" class="fa fa-file-pdf btns toPDF px-2 py-2" id="toPDF"
                         data-toggle="tooltip" title="PDF"></a>
 
-                        <a href="" class=" fa fa-print btns px-2 py-2"   
-                            title="PRINT" id="printbtn" onclick="toggleAndPrint('Template')"> </a>
+                        <a href="#" class=" fa fa-print btns px-2 py-2"   
+                            title="PRINT" id="printbtn" onclick="window.print()"> </a>
 
                         <a href="" class="fa fa-envelope btns px-2 py-2" 
                             title="MAIL" data-toggle="modal" data-target="#emails" > </a>
@@ -460,16 +466,16 @@
                 </div>
 
                 <div class="tab">
-                    <a class="tablinks mx-2 btns px-2 py-2" onclick="openTab(event, 'Template')" role="button"><i
+                    <a class="tablinks mx-2 btns px-2 py-2" onclick="openTab('Template')" role="button" id="template-btn"><i
                             class="fa fa-file-word "></i> Template</a>
-                    <a class="tablinks  btns px-2 py-2" onclick="openTab(event, 'Overview')" role="button"><i class="fa fa-eye"></i>
+                    <a class="tablinks  btns px-2 py-2" onclick="openTab('Overview')" role="button" id="overview-btn"><i class="fa fa-eye"></i>
                         Overview</a>
                 </div>
             </div>
             <hr class="hr">
+        <div style="position: relative;">
 
-
-            <div id="Template" class=" print-only page tabcontent p-5 m-3" style="display: block; background-color:azure">
+            <div id="Template" class=" print-only page tabcontent p-5 m-3" style="display: block; background-color:azure;visibility: visible;">
                 <div class="row pt-0 m-0 text-center">
                     <div class="col-4 "></div>
                     <div class="col-4 ">
@@ -637,7 +643,7 @@
 
 
             <!-- overview -->
-            <div id="Overview" class="tabcontent mt-0 border-0 p-4 mx-0" style="overflow-x: hidden; border-top: #ccc double 2px; background-color: burlywood ;border-radius: 5px;">
+            <div id="Overview" class="tabcontent mt-0 border-0 p-4 mx-0" style="overflow-x: hidden; border-top: #ccc double 2px; background-color: burlywood ;border-radius: 5px;display: none;">
 
                 <h3 class="mb-0 mx-5 text-muted" style="color: rgb(161, 195, 226);">{{ company.company_name }}</h3>
                 <center>
@@ -830,7 +836,7 @@
                     
                 </div>
             </div>
-
+        </div>
         </div>
     </div>
 
@@ -1117,22 +1123,26 @@ window.onclick = function (event) {
 
 
 <script>
-    function openTab(evt, tabName) {
-        var i, tabcontent, tablinks;
-        tabcontent = document.getElementsByClassName("tabcontent");
-
-        for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
+    function openTab(tabName) {
+        var template = document.getElementById('Template');
+        var overview = document.getElementById('Overview');
+    
+        if (tabName === 'Template') {
+            template.style.zIndex = "999";
+            overview.style.display = "none";
+        } else if (tabName === 'Overview') {
+            template.style.zIndex = "0";
+            overview.style.display = "block";
         }
-
-        tablinks = document.getElementsByClassName("tablinks");
-
-        for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace(" active", "");
+    
+        // Remove "active" class from all tablinks
+        var tablinks = document.getElementsByClassName("tablinks");
+        for (var i = 0; i < tablinks.length; i++) {
+            tablinks[i].classList.remove("active");
         }
-
-        document.getElementById(tabName).style.display = "block";
-        evt.currentTarget.className += " active";
+    
+        // Add "active" class to the clicked tablink
+        document.querySelector('[onclick="openTab(\'' + tabName + '\')"]').classList.add("active");
     }
 
     function showTax() {
@@ -1263,7 +1273,7 @@ $(document).ready(function () {
  });
 
 </script>
-<script>
+<!-- <script>
     function toggleAndPrint(sectionId) {
         var templateSection = document.getElementById("Template");
         var overviewSection = document.getElementById("Overview");
@@ -1278,5 +1288,5 @@ $(document).ready(function () {
 
         window.print();
     }
-</script>
+</script> -->
 {% endblock %}
